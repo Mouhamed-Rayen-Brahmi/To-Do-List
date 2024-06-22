@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .todo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+        .todo-item input[type="hidden"] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4 mb-3">To-Do List</h1>
+        <form action="/add" method="POST" class="mb-3">
+            <div class="input-group">
+                <input type="text" name="newItem" class="form-control" placeholder="Add a new item" required>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Add Item</button>
+                </div>
+            </div>
+        </form>
+        <ul class="list-group">
+            <% todoList.forEach((item, index) => { %>
+                <li class="list-group-item todo-item">
+                    <%= item %>
+                    <form action="/delete" method="POST">
+                        <input type="hidden" name="itemIndex" value="<%= index %>">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</body>
+</html>
